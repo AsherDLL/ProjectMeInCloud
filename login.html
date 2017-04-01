@@ -1,0 +1,93 @@
+<html>
+
+<head>
+  <title>
+   login
+  </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+// contact
+function LoginObject(myEmail, myPasswd) {
+    this.email = myEmail;
+    this.password = myPasswd;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
+
+function loginDemo()
+{
+	//alert("testing...")
+	var myData = new LoginObject(
+    $("#email").val(), 
+    $("#passwd").val());
+	
+  alert(myData.toJsonString());
+
+	 jQuery.ajax({
+         type: "POST",
+         url: "_ah/api/usuarios_api/v1/users/login",
+         data: myData.toJsonString(),
+         contentType: "application/json; charset=utf-8",
+         dataType: "json",
+         success: function (response) {
+              // do something
+              sessionStorage.token = response.token;
+              alert ("token generado: " + sessionStorage.token);
+              window.location = "/menu";
+
+         },
+     
+         error: function (error) {            
+              // error handler
+              alert(error)
+         }
+
+     });
+
+}
+
+</script>
+
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="MenuA.php">Panel de administración</a>
+        </div>
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+      </div>
+    </nav>
+    <br><br><br>
+    <div class="col-md-2 col-sm-2">
+    </div>
+    <div class="col-md-10 col-sm-10">
+      <h1> Login demo</h1>
+      <div>
+        <label for="email" class="col-md-2 col-sm-2">email:</label>
+        <input class="col-md-5 col-sm-5" type="text" id="email" value="root@kubeet.com" />
+        <div class="col-md-5 col-sm-5">
+          <p>.</p>
+        </div>
+      </div>
+      <div>
+        <label for="passwd" class="col-md-2 col-sm-2">password:</label>
+        <input class="col-md-5 col-sm-5" type="text" id="passwd" value="docker"/>
+        <div class="col-md-5 col-sm-5">
+          <p>.</p>
+        </div>
+      </div>
+      <br><br><br>
+      <button onclick="loginDemo()" class="btn btn-lg btn-primary"> Login </button> 
+    </div>
+  </div>
+</body>
+</html>

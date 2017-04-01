@@ -1,0 +1,75 @@
+    @media only screen and (min-width:960px){
+        /* styles for browsers larger than 960px; */
+    }
+    @media only screen and (min-width:1440px){
+        /* styles for browsers larger than 1440px; */
+    }
+    @media only screen and (min-width:2000px){
+        /* for sumo sized (mac) screens */
+    }
+    @media only screen and (max-device-width:480px){
+       /* styles for mobile browsers smaller than 480px; (iPhone) */
+       .bg-color-invert {
+            margin-top: 8px !important;
+        }
+       .row.row-gap-huge {
+            margin-top: 73px;
+        }
+        .ca-menu li {
+            width: 100% !important;
+        }
+        .ca-sub {
+            display: none !important;
+        }
+        .ca-menu{
+            margin: 0px !important;
+        }
+        .ca-content {
+            top: 15px !important;
+        }
+        .ca-main {
+            font-size: 20px !important;
+        }
+        .list{
+            margin-top: 4px;
+        }
+        .partnerimg{
+            padding-right: 20px;
+            margin-bottom:20px;
+        }
+        .homepage-tile .tile-title{
+            margin-top: 50px;
+        }
+        .homepage-tile .fa{
+            margin-top: 30px;
+        }
+    }
+    @media only screen and (max-device-width:480px) and (orientation:landscape){
+       /* styles for mobile browsers smaller than 480px; (iPhone) */
+    }
+    @media only screen and (device-width:768px){
+       /* default iPad screens */
+        .homepage-tile .tile-title{
+            margin-top: 70px;
+        }
+        .homepage-tile .fa{
+            margin-top: 50px;
+        }
+    }
+    /* different techniques for iPad screening */
+    @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+      /* For portrait layouts only */
+    }
+
+    @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+      /* For landscape layouts only */
+    }
+    @media only screen and (min-device-width: 568px) and (max-device-width: 568px) and (orientation:landscape) {
+    
+    }
+    @media only screen and (min-device-width: 667px) and (max-device-width: 667px) and (orientation:landscape) {
+    
+    }
+    @media only screen and (min-device-width: 736px) and (max-device-width: 736px) and (orientation:landscape) {
+    
+    }

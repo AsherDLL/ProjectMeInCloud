@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<!-- Template site title
+   ================================================== -->
+	<title>Galaxy - Responsive Business template</title>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+
+	<!-- Bootstrap CSS
+   ================================================== -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Animate CSS
+   ================================================== -->
+	<link rel="stylesheet" href="css/animate.min.css">
+
+	<!-- Font Icons
+   ================================================== -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/et-line-font.css">
+
+	<!-- Nivo Lightbox CSS
+   ================================================== -->
+	<link rel="stylesheet" href="css/nivo-lightbox.css">
+	<link rel="stylesheet" href="css/nivo_themes/default/default.css">
+
+	<!-- Owl Carousel CSS
+   ================================================== -->
+   	<link rel="stylesheet" href="css/owl.theme.css">
+	<link rel="stylesheet" href="css/owl.carousel.css">
+
+	<!-- Main CSS
+   ================================================== -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Google web font 
+   ================================================== -->	
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:700,400' rel='stylesheet' type='text/css'>
+<script type="text/javascript">
+
+function getData(){
+	sessionStorage.empresa = "kubeet"; //Nombre de la empresa, lo obtendremos de GET pero por ahora esta hardcodeado
+    jQuery.support.cors = true;
+    var i=0;
+    //Obtendremos info del titulo de Proyectos
+    try{                         
+    	$.ajax({
+	        url: "getprojectheader",
+	        dataType: 'json',
+	        cache: false,
+	        contentType: false,
+	        processData: true,
+	        data: {empresa: sessionStorage.empresa},                         
+	        type: 'get',
+	        crossDomain: true,
+	        success: function(response) {
+			  	tweets = response;
+		        //alert(response);
+		        tweets.forEach(function (tweet) {
+		            var nombre = "<div class='section-title'> " +
+		                        "<h5>" + tweet.urlImage + "</h5>" +
+		                        "<h3>" + tweet.puesto + "</h3>" +
+		                        "</div>";
+		            $("#divTeam").append(nombre);
+		        });
+	      	}
+        });
+    } catch(e) {
+    	alert("error : " +  e);
+    }
+
+    //Obtendremos info de cada proyecto
+    i=0;
+    try{                         
+    	$.ajax({
+	        url: "getproyecto",
+	        dataType: 'json',
+	        cache: false,
+	        contentType: false,
+	        processData: true,
+	        data: {empresa: sessionStorage.empresa},                         
+	        type: 'get',
+	        crossDomain: true,
+	        success: function(response) {
+			  	tweets = response;
+		        //alert(response);
+		        tweets.forEach(function (tweet) {
+		        	if(i%2==0){
+			            var nombre = "<div class='col-md-12 col-sm-12 wow fadeInUp' data-wow-delay='0.2s'> " +
+			                        "<div class='col-md-4 col-sm-4'>" +
+			                        "<img src='" + tweet.urlImage + "' class='img-responsive img-rounded' alt='team img' heigth='200' width='200'" + " >" +
+			                        "</div>" +
+			                        "<div class='col-md-8 col-sm-8'>" +
+			                        "<div class='section-title wow bounceIn'> " +
+			                        "<h5>" + tweet.titulo + "</h5>" +
+			                        "<h3>" + tweet.contenido + "</h3>" +
+			                        "</div>" +
+			                        "</div>" +
+			                        "</div>";
+			            $("#divTeam").append(nombre);
+			        }else{
+			        	var nombre = "<div class='col-md-12 col-sm-12 wow fadeInUp' data-wow-delay='0.2s'> " +
+			                        "<div class='col-md-8 col-sm-8'>" +
+			                        "<div class='section-title wow bounceIn'> " +
+			                        "<h5>" + tweet.titulo + "</h5>" +
+			                        "<h3>" + tweet.contenido + "</h3>" +
+			                        "</div>" +
+			                        "</div>" +
+			                        "<div class='col-md-4 col-sm-4'>" +
+			                        "<img src='" + tweet.urlImage + "' class='img-responsive img-rounded' alt='team img' heigth='200' width='200'" + " >" +
+			                        "</div>" +
+			                        "</div>";
+			            $("#divTeam").append(nombre);
+			        }
+			        
+		        });
+			   
+	      	}
+        });
+    } catch(e) {
+    	alert("error : " +  e);
+    }
+
+
+
+//Obtendremos info de cada proyecto
+    i=0;
+    try{                         
+    	$.ajax({
+	        url: "getservice",
+	        dataType: 'json',
+	        cache: false,
+	        contentType: false,
+	        processData: true,
+	        data: {empresa: sessionStorage.empresa},                         
+	        type: 'get',
+	        crossDomain: true,
+	        success: function(response) {
+			  	tweets = response;
+		        //alert(response);
+		        tweets.forEach(function (tweet) {
+		            var nombre = "<div class='col-md-4 col-sm-4'> " +
+		                        "<img src='" + tweet.urlImage + "' class='img-responsive img-rounded wow fadeInUp' alt='team img' heigth='200' width='200'" + " >" +
+		                        "<h3>" + tweet.titulo + "</h3>" +
+		                        "<p>" + tweet.descripcion + "</p>" +
+		                        "</div>";
+		            $("#divServices").append(nombre);
+		        });
+			    
+	      	}
+        });
+    } catch(e) {
+    	alert("error : " +  e);
+    }
+
+//Obtendremos info de cada proyecto
+    i=0;
+    try{                         
+    	$.ajax({
+	        url: "getportafolio",
+	        dataType: 'json',
+	        cache: false,
+	        contentType: false,
+	        processData: true,
+	        data: {empresa: sessionStorage.empresa},                         
+	        type: 'get',
+	        crossDomain: true,
+	        success: function(response) {
+			  	tweets = response;
+		        //alert(response);
+		        tweets.forEach(function (tweet) {
+		            var nombre = "<div class='col-md-4 col-sm-4'> " +
+		            			"<div class='portfolio-des'>" +
+		            			'<img src="'+tweet.urlImage+'" alt="portfolio img">' +
+		                        "</div>" +
+		                        "</div>";
+		            $("#portafolio").append(nombre);
+		        });
+			    
+	      	}
+        });
+    } catch(e) {
+    	alert("error : " +  e);
+    }
+
+
+/*
+
+    try{                         
+    	$.ajax({
+	        url: "http://localhost:8080/getteam",
+	        dataType: 'json',
+	        cache: false,
+	        contentType: false,
+	        processData: true,
+	        data: {empresa: sessionStorage.empresa},                         
+	        type: 'get',
+	        crossDomain: true,
+	        success: function(response) {
+			  	tweets = response;
+		        //alert(response);
+		        tweets.forEach(function (tweet) {
+		            var nombre = "<div class='col-md-3 col-sm-3 wow fadeInUp' data-wow-delay='0.2s'> " +
+		                        "<img src='" + tweet.urlImage + "'" +
+		                        " class='img-responsive img-circle' alt='team img' heigth='150' width='150'" +
+		                        " >" +
+		                        " <div class='section-title wow bounceIn'> " +
+		                        "<h3>" + tweet.puesto + "</h3>" +
+		                        "<h5>" + tweet.nombre + "</h5>" +
+		                        "<a href=" + tweet.urlImage + "> descargar </a>" +
+		                        "</div>" +
+		                        "</div>";
+		            $("#divTeam").append(nombre);
+		        });
+	      	}
+        });
+    } catch(e) {
+    	alert("error : " +  e);
+    }
+
+*/
+
+}
+
+
+</script>
+	
+</head>
+
+<body onload="getData()" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+
+<!-- Preloader section
+================================================== -->
+<section class="preloader">
+	<div class="sk-three-bounce">
+      	<div class="sk-child sk-bounce1"></div>
+      	<div class="sk-child sk-bounce2"></div>
+     	 <div class="sk-child sk-bounce3"></div>
+	</div>
+</section>
+
+
+<!-- Navigation section
+================================================== -->
+<section class="navbar navbar-default navbar-fixed-top sticky-navigation" role="navigation">
+	<div class="container">
+
+		<div class="navbar-header">
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon icon-bar"></span>
+				<span class="icon icon-bar"></span>
+				<span class="icon icon-bar"></span>
+			</button>
+			<a href="#" class="navbar-brand">PROYECTOS</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav navbar-right main-navigation">
+				<li><a href="#home" class="smoothScroll">HOME</a></li>
+				<li><a href="#about" class="smoothScroll">ABOUT</a></li>
+				<li><a href="#team" class="smoothScroll">TEAM</a></li>
+				<li><a href="#service" class="smoothScroll">SERVICE</a></li>
+				<li><a href="#portfolio" class="smoothScroll">PORTFOLIO</a></li>
+				<li><a href="#price" class="smoothScroll">PACKAGE</a></li>
+				<li><a href="#contact" class="smoothScroll">CONTACT</a></li>
+			</ul>
+		</div>
+
+	</div>
+</section>
+
+
+<!-- Home section
+================================================== -->
+<section id="home" class="parallax-section">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-offset-2 col-md-8 col-sm-12">
+				<h1>Introduction</h1>
+				<h2 class="wow bounceIn">Una Pagina Para Proyectos</h2>
+				<p class="wow fadeIn" data-wow-delay="0.3s">Somos una empresa que empodera a las demas a poder mostrar sus proyectos en la web</p>
+				<a href="#" class="btn btn-default section-btn smoothScroll wow fadeInUp" data-wow-delay="0.6s">LEARN MORE</a>
+				<a href="#portfolio" class="btn btn-danger section-btn smoothScroll wow fadeInUp hidden-xs" data-wow-delay="0.6s">VIEW PORTFOLIO</a>
+			</div>
+
+		</div>
+	</div>		
+</section>
+
+
+<!-- About section
+================================================== -->
+<section id="about" class="parallax-section">
+	<div class="container">
+		<div class="row" id="divServices">
+
+			<!-- Section title
+			================================================== -->
+			<div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 text-center">
+				<div class="section-title">
+					<h5>Nuestros Servicios</h5>
+					
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+<!-- portfolio section
+================================================== -->
+<section id="portfolio" class="parallax-section">
+	<div class="container">
+		<div class="row" id="portafolio">
+
+			<!-- Section title
+			================================================== -->
+			<div class="col-md-12 col-sm-12 text-center">
+				<div class="section-title wow bounceIn">
+					<h5>MY PORTFOLIO</h5>
+				</div>
+			</div>	
+		</div>
+	</div>
+</section>
+
+<!-- team section
+================================================== -->
+<section id="team" class="parallax-section">
+	<div class="container">
+		<div class="row" id="divTeam">
+
+			<!-- Section title
+			================================================== -->
+			<div class="col-md-8 col-sm-8" id="projectsIntro">
+				<div class="section-title">
+					<h5>Nuestros Proyectos</h5>
+					<h3>:D</h3>
+				</div>
+			</div>
+
+			<div class="col-md-12 col-sm-12"></div>
+
+		</div>
+	</div>
+</section>
+
+
+
+
+
+
+
+<!-- Contact section
+================================================== -->
+<section id="contact" class="parallax-section">
+	<div class="container">
+		<div class="row">
+
+			<!-- Section title
+			================================================== -->
+			<div class="col-md-12 col-sm-12 text-center">
+				<div class="section-title">
+					<h5>GET IN TOUCH</h5>
+				</div>
+			</div>
+
+			<!-- Contact form section
+			================================================== -->
+			<div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 wow fadeIn" data-wow-delay="0.6s">
+				<div class="contact-form">
+					<form id="contact-form" method="post" action="contact.html">
+						<div class="col-md-6 col-sm-6">
+							<input name="name" type="text" class="form-control" placeholder="Your Name" required>
+							<input name="email" type="email" class="form-control" placeholder="Your Email" required>
+						</div>
+						<div class="col-md-6 col-sm-6">
+							<textarea name="message" class="form-control" placeholder="Message" rows="4" required></textarea>
+						</div>
+						<div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
+							<input type="submit" class="form-control submit" value="SEND MESSAGE">
+						</div>
+					</form>
+				</div>
+			</div>
+			</div>
+			<div class="col-md-12 col-sm-12"></div>
+			<!-- Contact detail section
+			================================================== -->
+			<div class="col-md-offset-2 col-md-3 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
+				<div class="media">
+					<div class="media-object pull-left">
+						<i class="icon icon-phone"></i>
+					</div>
+					<div class="media-body">
+						<h3 class="media-heading">PHONE</h3>
+						<p> + 01 2034 2304234</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
+				<div class="media">
+					<div class="media-object pull-left">
+						<i class="icon icon-envelope"></i>
+					</div>
+					<div class="media-body">
+						<h3 class="media-heading">EMAIL</h3>
+						<p> contact@galaxyagency.co</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
+				<div class="media">
+					<div class="media-object pull-left">
+						<i class="icon icon-browser"></i>
+					</div>
+					<div class="media-body">
+						<h3 class="media-heading">ADDRESS</h3>
+						<p> + 0034 Rose, twitter Inc.</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+
+<!-- Footer section
+================================================== -->
+<footer>
+	<!-- google map -->
+		<div class="google_map">
+			<div id="map-canvas"></div>
+		</div>
+</footer>
+
+
+<!-- copyright section
+================================================== -->
+<section id="copyright">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-12 col-sm-12">
+				<div class="copyright-text wow fadeInUp" data-wow-delay="0.9s">
+					<ul class="social-icon">
+						<li><a href="#" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
+						<li><a href="#" class="fa fa-twitter wow fadeIn" data-wow-delay="0.6s"></a></li>
+						<li><a href="#" class="fa fa-dribbble wow fadeIn" data-wow-delay="0.9s"></a></li>
+						<li><a href="#" class="fa fa-behance wow fadeIn" data-wow-delay="1s"></a></li>
+					</ul>
+					<p> &copy; 2016 | Galaxy Agency - All Rights Reserved.</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+
+
+<!-- Javascript 
+================================================== -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.nav.js"></script>
+<script src="js/jquery.parallax.js"></script>
+<script src="js/nivo-lightbox.min.js"></script>
+<script src="js/counter.js"></script>
+<script src="js/smoothscroll.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/custom.js"></script>
+
+
+</body>
+</html>

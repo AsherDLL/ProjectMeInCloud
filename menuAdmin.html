@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Menu Admin</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+		// Funciones de click
+		function goToProyect() {
+		    window.location = "/admin";
+		};
+
+		function goToDisplayProyects() {
+		    window.location = "/displayProyects";
+		};
+		function goToCreateService() {
+		    window.location = "/createService";
+		};
+		
+		function goToDisplayService() {
+		    window.location = "/displayServices";
+		};
+		function goToCreatePortfolio() {
+		    window.location = "/createPortfolio";
+		};
+		function goToDisplayPortafolio() {
+		    window.location = "/displayPortafolio";
+		};
+	</script>
+
+    </head>
+    <body>
+		<div class="container">
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+			    		<a class="navbar-brand">Menu Administrativo</a>
+			 		</div>
+				    <ul class="nav navbar-nav">
+				    </ul>
+				    <ul class="nav navbar-nav navbar-right">
+				    </ul>
+			  	</div>
+			</nav>
+
+			<div class="jumbotron" style="background-color:#007dc6">
+		        <h1 style="color:#ffc220">Menu</h1> 
+		        <p class="lead">Aqui puedes modificar la informacion de la pagina</p>
+			</div>
+	        	<div class="row placeholders">
+		            <div class="col-sm-3 placeholder" align="center">
+			            <div id="some-id" class="some-class" onclick="goToProyect();">
+				              <img src="images/addProyect.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+				              <h4>Crea Proyecto</h4>
+			             </div>
+		            </div>
+		            <div class="col-sm-3 placeholder" align="center">
+			            <div id="some-id" class="some-class" onclick="goToDisplayProyects();">
+				              <img src="images/editProject.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+				              <h4>Edita Proyecto</h4>
+			             </div>
+		            </div>
+		            <div class="col-sm-3 placeholder" align="center">
+			            <div id="some-id" class="some-class" onclick="goToCreateService();">
+				              <img src="images/nuevoServicio.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+				              <h4>Crea servicio</h4>
+			             </div>
+		            </div>
+		            <div class="col-sm-3 placeholder" align="center">
+			            <div id="some-id" class="some-class" onclick="goToDisplayService();">
+				              <img src="images/listServices.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+				              <h4>Edita Servico</h4>
+			             </div>
+		            </div>
+		            <div class="col-sm-3 placeholder" align="center">
+		            </div>
+
+		            <div class="col-sm-3 placeholder" align="center">
+			            <div id="some-id" class="some-class" onclick="goToCreatePortfolio();">
+				              <img src="images/createPortfolio.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+				              <h4>Sube imagenes a Portafolio</h4>
+			             </div>
+		            </div>
+		            <div class="col-sm-3 placeholder" align="center">
+			            <div id="some-id" class="some-class" onclick="goToDisplayPortafolio();">
+				              <img src="images/Listphotos.png" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+				              <h4>Edita galeria de Portafolio</h4>
+			             </div>
+		            </div>
+		            <div class="col-sm-3 placeholder" align="center">
+		            </div>
+		             
+	        	</div>
+	        	<footer class="footer">
+			    	<br><br><br><br>
+			        <p>ITESM Campus Puebla</p>
+			    </footer>
+	    </div>
+    </body>
+</html>

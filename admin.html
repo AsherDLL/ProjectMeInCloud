@@ -1,0 +1,202 @@
+<html>
+
+<head>
+  <title>Nuevo Proyecto</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+// contact
+/*function TeamObject(myNombre, myPuesto) {
+    
+    this.nombre = myNombre;
+    this.puesto = myPuesto;
+    this.token = sessionStorage.token;
+    this.urlImage = sessionStorage.urlImage;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+}; */
+
+function ProyectoObject(myTitulo, myContenido){
+  this.titulo = myTitulo;
+  this.contenido = myContenido;
+  this.token = sessionStorage.token;
+  this.urlImage = sessionStorage.urlImage;
+  this.toJsonString = function(){ return JSON.stringify(this);};
+
+};
+
+
+function addProyecto(){
+  try{
+    alert("token : " + sessionStorage.token);
+
+    var myData = new ProyectoObject(
+     $("#titulo").val(), 
+     $("#contenido").val() 
+     );
+    alert(myData.toJsonString());
+
+     jQuery.ajax({
+           type: "POST",
+           url: "_ah/api/proyecto_api/v1/proyecto/insert",
+           data: myData.toJsonString(),
+           contentType: "application/json; charset=utf-8",
+           dataType: "json",
+           success: function (response) {
+                // do something
+                alert (response.code + " " + response.message);
+                window.location = "/menu";
+           },
+           error: function (error) {            
+                // error handler
+                alert("error :" + error.message)
+           }
+
+       });
+
+   }
+   catch(error)
+   {
+    alert(error);
+   }
+
+}
+
+
+
+
+
+function TokenObject() {
+    
+    this.tokenint = sessionStorage.token;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
+
+
+function getProyectoList()
+{
+  try
+  {
+
+
+    //alert("token : " + sessionStorage.token);
+
+    var myData = new TokenObject();
+    
+    alert(myData.toJsonString());
+
+     jQuery.ajax({
+           type: "POST",
+           url: "_ah/api/proyecto_api/v1/proyecto/list",
+           data: myData.toJsonString(),
+           contentType: "application/json; charset=utf-8",
+           dataType: "json",
+           success: function (response) {
+                // do something
+                
+                alert (response.data);
+           },
+       
+           error: function (error) {            
+                // error handler
+                alert("error :" + error.message)
+           }
+
+       });
+
+   }
+   catch(error)
+   {
+    alert(error);
+   }
+
+}
+
+function uploadDemo(){
+
+    var file_data = $("#uploaded_file").prop("files")[0];
+    var form_data = new FormData();
+    form_data.append("uploaded_file", file_data)
+
+    jQuery.support.cors = true;
+    try
+    {
+     $.ajax({
+                url: "up",
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                crossDomain: true,
+                success: function(response){
+
+                                document.getElementById("preview").src=response;
+
+                                sessionStorage.urlImage = response;
+
+                                document.getElementById("url_photo").value = response;
+                }
+      });
+    }
+    catch(e)
+    {
+      alert("error : " +  e);
+     }
+}
+function goToMenu() {
+  window.location = "/menu";
+};
+
+
+</script>
+
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="MenuA.php">Añade un nuevo proyeto</a>
+        </div>
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+      </div>
+    </nav>
+    <div class="col-md-2 col-sm-2">
+    </div>
+    <div class="col-md-10 col-sm-10">
+      <h1>Añade un nuevo proyecto</h1>
+      <label for="titulo">Add title for this project:</label><br>
+      <input type="text" id="titulo"  /> <br>
+      
+      <label for="contenido">Describe project: </label><br>
+      <textarea rows="4" cols="50" id="contenido"></textarea>
+
+
+      <div >
+      <label for="exampleInputEmail1"><i>Upload a descriptive image</i></label>
+       <br>
+       <img  src="" alt="Image preview" id="preview" style="width:128px;height:128px;" >
+       <br>
+       <input type="text" id="url_photo">
+       <br><input onchange="uploadDemo()" type="file"  id="uploaded_file" name="uploaded_file" >
+      </div>
+      <br>
+      <button onclick="addProyecto()" class="btn btn-success"> Save </button>
+      <button onclick="goToMenu()" class="btn btn-primary"> Menu </button> 
+ 
+      <br><br>
+    </div>
+  </div>
+
+</body>
+</html>

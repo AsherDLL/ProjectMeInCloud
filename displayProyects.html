@@ -1,0 +1,207 @@
+<html>
+
+<head>
+  <title>Proyectos Actuales</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+// contact
+/*function TeamObject(myNombre, myPuesto) {
+    
+    this.nombre = myNombre;
+    this.puesto = myPuesto;
+    this.token = sessionStorage.token;
+    this.urlImage = sessionStorage.urlImage;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+}; 
+
+function addTeamDemo()
+{
+  try
+  {
+
+
+    alert("token : " + sessionStorage.token);
+
+    var myData = new TeamObject(
+     $("#nombre").val(), 
+     $("#puesto").val() 
+     );
+    alert(myData.toJsonString());
+
+     jQuery.ajax({
+           type: "POST",
+           url: "http://localhost:8080/_ah/api/team_api/v1/team/insert",
+           data: myData.toJsonString(),
+           contentType: "application/json; charset=utf-8",
+           dataType: "json",
+           success: function (response) {
+                // do something
+                alert (response.code + " " + response.message);
+           },
+       
+           error: function (error) {            
+                // error handler
+                alert("error :" + error.message)
+           }
+
+       });
+
+   }
+   catch(error)
+   {
+    alert(error);
+   }
+
+}*/
+
+function ProyectoObject(myTitulo, myContenido){
+  this.titulo = myTitulo;
+  this.contenido = myContenido;
+  this.token = sessionStorage.token;
+  this.urlImage = sessionStorage.urlImage;
+  this.toJsonString = function(){ return JSON.stringify(this);};
+
+};
+
+
+function TokenObject() {
+    
+    this.tokenint = sessionStorage.token;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
+
+function al(varr) {
+  sessionStorage.entityKeyForEdit=varr;
+  alert(" Yes! "+ sessionStorage.entityKeyForEdit);
+  window.location = "/editProyecto";
+};
+
+function getProyectoList(){
+  try{
+
+      var myData = new TokenObject();
+      jQuery.ajax({
+           type: "POST",
+           url: "_ah/api/proyecto_api/v1/proyecto/list",
+           data: myData.toJsonString(),
+           contentType: "application/json; charset=utf-8",
+           dataType: "json",
+           success: function (response) {
+                // do something
+                for (var key in response.data) {
+                  var obj = response.data[key]
+                  //alert(" Yes! " + obj['titulo']);
+                  var titulo= obj['titulo'];
+                  var entityKey= obj['entityKey'];
+                  var urlImage= obj['urlImage'];
+                  var contenido= obj['contenido'];
+
+                  var nombre =  "<tr>" +
+                                  "<td>" + entityKey + "</td>" +
+                                  "<td>" + titulo + "</td>" +
+                                  "<td>" + contenido + "</td>" +
+                                  "<td><img src='" + urlImage + "'width='50' height='50'></td>" +
+                                  "<td><div onclick='al(\""+entityKey+"\");' class='btn btn-success'>Edit</div> <div onclick='del(\""+entityKey+"\");' class='btn btn-danger'>Delete</div></td>" +
+                                "</tr>";
+                  $("#table").append(nombre);  
+                }
+           },
+       
+           error: function (error) {            
+                // error handler
+                alert("error :" + error.message)
+           }
+       });
+   }
+   catch(error){
+    alert(error);
+   }
+}
+
+function TokenObject2() {
+    this.entityKey = sessionStorage.entityKeyForEdit;
+    this.tokenint = sessionStorage.token;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
+
+function del(varr) {
+  sessionStorage.entityKeyForEdit=varr;
+  alert(" Yes! "+ sessionStorage.entityKeyForEdit);
+  getProyectRemoved();
+  window.location = "/menu";
+};
+
+function getProyectRemoved(){
+  try{
+      var myData = new TokenObject2();
+      jQuery.ajax({
+           type: "POST",
+           url: "_ah/api/proyecto_api/v1/proyecto/delete",
+           data: myData.toJsonString(),
+           contentType: "application/json; charset=utf-8",
+           dataType: "json",
+           success: function (response) {
+                alert("success");
+                
+           },
+       
+           error: function (error) {            
+                // error handler
+                alert("error :" + error.message)
+           }
+       });
+   }
+   catch(error){
+    alert(error);
+   }
+}
+
+function goToMenu() {
+  window.location = "/menu";
+};
+
+</script>
+
+</head>
+<body onload="getProyectoList()">
+  <div class="container">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="MenuA.php">Proyectos Actuales</a>
+        </div>
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+      </div>
+    </nav>
+    <div class="col-md-2 col-sm-2">
+    </div>
+    <div class="col-md-10 col-sm-10">
+      <h1>Proyectos Actuales</h1>
+    </div>
+
+    <table class="table table-striped" id="table">
+      <tr>
+        <th>entityKey</th>
+        <th>Titulo</th>
+        <th>Contenido</th>
+        <th>image</th>
+        <th>Actions</th>
+      </tr>
+    </table>
+    <button onclick="goToMenu()" class="btn btn-primary"> Menu </button> 
+
+  </div>
+
+</body>
+</html>
